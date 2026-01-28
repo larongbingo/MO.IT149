@@ -1,7 +1,5 @@
 ﻿package org.moit149.connectly.contactus
 
-import com.mongodb.MongoException
-import kotlinx.coroutines.runBlocking
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
