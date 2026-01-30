@@ -13,7 +13,7 @@ class SecurityConfig {
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests { authorize ->
-                authorize.requestMatchers("/").permitAll()
+                authorize.requestMatchers("/", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                 authorize.anyRequest().authenticated()
             }
             .oauth2Login { }

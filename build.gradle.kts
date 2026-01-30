@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
     implementation("org.springframework.boot:spring-boot-starter-micrometer-metrics")
     implementation("org.springframework.boot:spring-boot-starter-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
