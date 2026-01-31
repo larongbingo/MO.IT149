@@ -22,6 +22,7 @@ class SecurityConfig {
                 "/",
                 "/index.html",
                 "/error",
+                "/api/**",
                 "/api-docs",
                 "/api-docs/**",
                 "/swagger-ui",
