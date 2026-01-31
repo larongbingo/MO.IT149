@@ -18,17 +18,20 @@ class SecurityConfig {
     @Order(1)
     fun publicFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            .cors { }
             .securityMatcher(
                 "/",
                 "/index.html",
                 "/error",
-                "/api/**",
                 "/api-docs",
+                "/oauth2/**",
+                "/login/oauth2/**",
                 "/api-docs/**",
                 "/swagger-ui",
                 "/swagger-ui/**",
                 "/swagger-ui.html"
             )
+            .oauth2ResourceServer { it.jwt {} }
             .authorizeHttpRequests { auth ->
                 auth.anyRequest().permitAll()
             }
@@ -44,10 +47,11 @@ class SecurityConfig {
     @Order(2)
     fun appFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            .cors { }
             .authorizeHttpRequests { auth ->
                 auth.anyRequest().authenticated()
             }
-            .oauth2Login { }
+            .oauth2ResourceServer { it.jwt {} }
             .logout { }
             .csrf { it.disable() }
 

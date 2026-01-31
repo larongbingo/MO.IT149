@@ -14,16 +14,16 @@ import org.springframework.context.annotation.Configuration
 class OpenApiConfig {
     @Bean
     fun connectlyOpenApiConfig(): OpenAPI = OpenAPI()
-        .addSecurityItem(SecurityRequirement().addList("googleOauth"))
+        .addSecurityItem(SecurityRequirement().addList("auth0"))
         .components(
             Components().addSecuritySchemes(
-                "googleOauth",
+                "auth0",
                 SecurityScheme().type(SecurityScheme.Type.OAUTH2)
                     .flows(
                         OAuthFlows().authorizationCode(
                             OAuthFlow()
-                                .authorizationUrl("https://accounts.google.com/o/oauth2/v2/auth")
-                                .tokenUrl("https://oauth2.googleapis.com/token")
+                                .authorizationUrl("https://ewan.au.auth0.com/authorize")
+                                .tokenUrl("https://ewan.au.auth0.com/oauth/token")
                                 .scopes(
                                     Scopes()
                                         .addString("openid", "OpenID")
