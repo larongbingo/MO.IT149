@@ -10,12 +10,15 @@ data class User(
     @Indexed(unique = true) val externalId: String,
     val firstName: String,
     val lastName: String,
-    val email: String,
+    @Indexed(unique = true) val email: String,
     val picture: String,
-    var displayName: String,
-    var title: String?,
+    @Indexed(unique = true) val displayName: String,
+    val title: String,
+    val major: String,
+    val year: String,
+    val school: String,
 ) {
-    fun toUserDto(): UserDto = UserDto(email, firstName, lastName, picture, displayName, title)
+    fun toUserDto(): UserDto = UserDto(email, firstName, lastName, picture, displayName, title, major, year, school)
 }
 
 data class UserDto(
@@ -24,5 +27,8 @@ data class UserDto(
     val lastName: String,
     val picture: String,
     val displayName: String,
-    val title: String?
+    val title: String,
+    val major: String,
+    val year: String,
+    val school: String
 )

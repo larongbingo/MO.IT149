@@ -13,6 +13,9 @@ class UserService(private val auth0Service: Auth0Service, private val userReposi
         val user = userRepository.findByExternalId(externalIdClaim ?: return null)
         if (user != null) return null
 
+        val userWithSameDisplayName = userRepository.findByDisplayName(newUser.displayName)
+        if (userWithSameDisplayName != null) return null
+
         val userDetails = auth0Service.getUserProfile(externalId.tokenValue)
         userDetails ?: return null
 
@@ -24,7 +27,10 @@ class UserService(private val auth0Service: Auth0Service, private val userReposi
             email = userDetails.email,
             picture = userDetails.picture,
             displayName = newUser.displayName,
-            title = newUser.title
+            title = newUser.title,
+            major = newUser.major,
+            year = newUser.year,
+            school = newUser.school
         )
 
         return userRepository.save(newUser)

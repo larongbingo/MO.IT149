@@ -25,4 +25,10 @@ class UserController(private val userService: UserService) {
     }
 }
 
-data class NewUserDto(val displayName: String, val title: String)
+data class NewUserDto(
+    val displayName: String,
+    val title: String,
+    val major: String,
+    val year: String,
+    val school: String
+)
