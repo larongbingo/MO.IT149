@@ -1,13 +1,23 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val envProperties = Properties()
+val envFile: File? = rootProject.file("env.properties")
+if (envFile != null && envFile.exists()) {
+    envProperties.load(FileInputStream(envFile))
+}
+
 plugins {
     kotlin("jvm") version "2.2.21"
     kotlin("plugin.spring") version "2.2.21"
     id("org.springframework.boot") version "4.0.2"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.google.cloud.tools.jib") version "3.5.2"
 }
 
 group = "org.moit149"
-version = "0.0.1-SNAPSHOT"
-description = "Connectly.MOIT149"
+version = "0.0.1"
+description = "connectly-moit 149"
 
 java {
     toolchain {
@@ -17,6 +27,21 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+jib {
+    to {
+        image = "connectly-moit149"
+    }
+    container {
+        ports = listOf("8080")
+    }
+    dockerClient {
+        environment = mapOf(
+            "DB_CONNECTION_STRING" to envProperties.getProperty("DB_CONNECTION_STRING"),
+            "OAUTH_CLIENT_ID" to envProperties.getProperty("OAUTH_CLIENT_ID"),
+            )
+    }
 }
 
 dependencies {
