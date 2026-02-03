@@ -19,6 +19,9 @@ class UserService(private val auth0Service: Auth0Service, private val userReposi
         val userDetails = auth0Service.getUserProfile(externalId.tokenValue)
         userDetails ?: return null
 
+        val allInputs = listOf(newUser.displayName, userDetails.given_name, userDetails.family_name, userDetails.email)
+        if (allInputs.any { it.isBlank() }) return null
+
         val newUser = User(
             id = null,
             externalId = externalIdClaim,
