@@ -1,4 +1,4 @@
-﻿package org.moit149.connectly.auth
+﻿package org.moit149.connectly.configs
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

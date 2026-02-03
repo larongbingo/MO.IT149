@@ -1,4 +1,4 @@
-﻿package org.moit149.connectly
+﻿package org.moit149.connectly.configs
 
 import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.OpenAPI
