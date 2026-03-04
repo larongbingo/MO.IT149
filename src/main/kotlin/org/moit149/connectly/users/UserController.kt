@@ -17,11 +17,8 @@ class UserController(private val userService: UserService) {
     @PostMapping
     fun createUser(authentication: Authentication, @RequestBody newUser: NewUserDto): ResponseEntity<UserDto> {
         val newUserEntity = userService.createConnectlyProfile(authentication, newUser)
-
-        if (newUserEntity != null)
-            return ResponseEntity.ok(newUserEntity.toUserDto())
-
-        return ResponseEntity.badRequest().build()
+            ?: return  ResponseEntity.badRequest().build()
+        return ResponseEntity.ok(newUserEntity.toUserDto())
     }
 }
 
