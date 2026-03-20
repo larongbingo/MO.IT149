@@ -8,6 +8,7 @@ A project requirement for MOIT149
 
 ## Environment Variables
 Either create a new properties.env file or set the following environment variables:
+    
     DB_CONNECTION_STRING="Database connection string to a MongoDB database"
     
     OAUTH_CLIENT_ID="Auth0 client ID"
