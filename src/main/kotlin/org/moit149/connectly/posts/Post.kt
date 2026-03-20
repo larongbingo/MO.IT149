@@ -13,6 +13,7 @@ data class Post(
     val message: String,
     var likes: Int = 0,
     val createdAt: LocalDateTime = LocalDateTime.now(),
+    val uri: String? = null
 )
 
 data class PostDto(
@@ -20,5 +21,6 @@ data class PostDto(
     val user: UserDto,
     val message: String,
     val likes: Int,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    val uri: String? = null
 )

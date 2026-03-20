@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 import java.net.URI
 
 @RestController
@@ -16,10 +18,11 @@ class PostController(private val postService: PostService) {
     fun getAllPosts() = postService.getAllPosts()
 
     @PostMapping
-    fun createPost(authentication: Authentication, @RequestBody createPostDto: CreatePostDto): ResponseEntity<PostDto> {
-        val post = postService.createPost(createPostDto, authentication) ?: return ResponseEntity.badRequest().build()
+    fun createPost(
+        authentication: Authentication,
+        @RequestParam("message") message: String,
+        @RequestParam("file") file: MultipartFile): ResponseEntity<PostDto> {
+        val post = postService.createPost(authentication, message, file) ?: return ResponseEntity.badRequest().build()
         return ResponseEntity.created(URI("/api/posts/")).body(post)
     }
 }
-
-data class CreatePostDto(val message: String)
