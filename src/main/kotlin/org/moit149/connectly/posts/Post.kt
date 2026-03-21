@@ -17,8 +17,8 @@ data class Post(
 )
 
 data class PostDto(
-    val id: String,
-    val user: UserDto,
+    val id: String?,
+    val user: UserDto?,
     val message: String,
     val likes: Int,
     val createdAt: LocalDateTime,

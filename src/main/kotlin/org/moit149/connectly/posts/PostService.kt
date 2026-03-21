@@ -1,7 +1,6 @@
 ﻿package org.moit149.connectly.posts
 
 import kotlinx.coroutines.runBlocking
-import org.moit149.connectly.posts.comments.CommentRepository
 import org.moit149.connectly.users.UserService
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
@@ -12,7 +11,7 @@ class PostService(
     private val postRepository: PostRepository,
     private val userService: UserService,
     private val blobStorage: BlobStorage) {
-    fun getAllPosts() = postRepository.findAll()
+    fun getAllPosts() = postRepository.getAllPostsWithUser()
 
     fun createPost(authentication: Authentication, message: String, file: MultipartFile? = null): PostDto? {
         var uri: String? = null
